@@ -119,8 +119,10 @@ function updateUI() {
 
     if (isRecording) {
         recordingStatus.textContent = isPaused ? 'Recording paused' : 'Recording...';
+        recordingStatus.classList.add('recording');
     } else {
         recordingStatus.textContent = audioChunks.length > 0 ? 'Recording complete' : 'Not recording';
+        recordingStatus.classList.remove('recording');
     }
 }
 
