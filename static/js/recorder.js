@@ -24,15 +24,19 @@ async function startRecording() {
         mediaRecorder = new MediaRecorder(stream);
 
         mediaRecorder.ondataavailable = (event) => {
-            audioChunks.push(event.data);
+            if (event.data.size > 0) {
+                audioChunks.push(event.data);
+                console.log('Audio chunk added. Total chunks:', audioChunks.length);
+            }
         };
 
         mediaRecorder.onstop = () => {
             const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
             audioPlayer.src = URL.createObjectURL(audioBlob);
+            console.log('MediaRecorder stopped. Total audio chunks:', audioChunks.length);
         };
 
-        mediaRecorder.start();
+        mediaRecorder.start(100); // Collect data every 100ms
         isRecording = true;
         isPaused = false;
         updateUI();
@@ -60,7 +64,7 @@ function stopRecording() {
         mediaRecorder.stop();
         isRecording = false;
         isPaused = false;
-        console.log('Recording stopped. Audio chunks:', audioChunks.length); // Debug log
+        console.log('Recording stopped. Audio chunks:', audioChunks.length);
         updateUI();
     }
 }
@@ -111,7 +115,7 @@ function updateUI() {
     resetButton.disabled = isRecording;
     submitButton.disabled = isRecording || audioChunks.length === 0;
 
-    console.log('UI updated. isRecording:', isRecording, 'audioChunks:', audioChunks.length, 'submitButton disabled:', submitButton.disabled); // Debug log
+    console.log('UI updated. isRecording:', isRecording, 'audioChunks:', audioChunks.length, 'submitButton disabled:', submitButton.disabled);
 
     if (isRecording) {
         recordingStatus.textContent = isPaused ? 'Recording paused' : 'Recording...';
