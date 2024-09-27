@@ -60,6 +60,7 @@ function stopRecording() {
         mediaRecorder.stop();
         isRecording = false;
         isPaused = false;
+        console.log('Recording stopped. Audio chunks:', audioChunks.length); // Debug log
         updateUI();
     }
 }
@@ -109,6 +110,8 @@ function updateUI() {
     stopButton.disabled = !isRecording;
     resetButton.disabled = isRecording;
     submitButton.disabled = isRecording || audioChunks.length === 0;
+
+    console.log('UI updated. isRecording:', isRecording, 'audioChunks:', audioChunks.length, 'submitButton disabled:', submitButton.disabled); // Debug log
 
     if (isRecording) {
         recordingStatus.textContent = isPaused ? 'Recording paused' : 'Recording...';
