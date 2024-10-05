@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio Recorder</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Audio Recorder</h1>
+        <h1><i class="fas fa-microphone"></i> Audio Recorder</h1>
         <div id="recordingStatus">Not recording</div>
         <div class="controls">
-            <button id="startButton">Start</button>
-            <button id="pauseButton">Pause</button>
-            <button id="stopButton">Stop</button>
-            <button id="resetButton">Reset</button>
+            <button id="startButton"><i class="fas fa-play"></i> Start</button>
+            <button id="pauseButton"><i class="fas fa-pause"></i> Pause</button>
+            <button id="stopButton"><i class="fas fa-stop"></i> Stop</button>
+            <button id="resetButton"><i class="fas fa-redo"></i> Reset</button>
         </div>
         <audio id="audioPlayer" controls></audio>
-        <button id="submitButton">Submit</button>
+        <button id="submitButton"><i class="fas fa-upload"></i> Submit</button>
         <div>
             <a id="fileUrl" target="_blank"></a>
         </div>
